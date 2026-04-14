@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S&P 500 AI Analysis</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body { font-family: Arial; margin:0; background:#0f172a; color:#e2e8f0;}
+header { background:linear-gradient(90deg,#1e3a8a,#0ea5e9); padding:20px; text-align:center;}
+.container { padding:20px;}
+.section { background:#1e293b; padding:20px; margin-bottom:20px; border-radius:10px;}
+input { padding:5px; margin:5px;}
+button { padding:10px; background:#0ea5e9; border:none; color:white; cursor:pointer;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>S&P 500 AI + Valuation Dashboard</h1>
+<p>Interactive Strategic Analysis</p>
+</header>
+
+<div class="container">
+
+<!-- AI PREDICTION -->
+<div class="section">
+<h2>🤖 AI Market Prediction (Scenario-Based)</h2>
+
+<p>Select Scenario:</p>
+<select id="scenario">
+<option value="bull">Bull Market</option>
+<option value="base">Base Case</option>
+<option value="bear">Bear Market</option>
+</select>
+
+<button onclick="predict()">Run Prediction</button>
+
+<p id="prediction"></p>
+
+<canvas id="predictionChart"></canvas>
+</div>
+
+<!-- VALUATION MODEL -->
+<div class="section">
+<h2>📊 Valuation Model (DCF + P/E)</h2>
+
+<p>Growth Rate (%) <input id="growth" value="6"></p>
+<p>Discount Rate (%) <input id="discount" value="8"></p>
+<p>Current EPS ($) <input id="eps" value="220"></p>
+<p>PE Multiple <input id="pe" value="18"></p>
+
+<button onclick="calculate()">Calculate Valuation</button>
+
+<p id="valuation"></p>
+</div>
+
+</div>
+
+<script>
+
+// AI Prediction Logic
+function predict(){
+    let scenario = document.getElementById("scenario").value;
+    let result = "";
+    let data;
+
+    if(scenario === "bull"){
+        result = "Projected Growth: +12% annually. Driven by AI boom and rate cuts.";
+        data = [100,112,125,140];
+    }
+    else if(scenario === "base"){
+        result = "Projected Growth: +6% annually. Stable macro conditions.";
+        data = [100,106,112,119];
+    }
+    else{
+        result = "Projected Growth: -5% to +2%. Recession risk and high rates.";
+        data = [100,98,101,103];
+    }
+
+    document.getElementById("prediction").innerText = result;
+
+    new Chart(document.getElementById("predictionChart"), {
+        type: 'line',
+        data: {
+            labels: ["2025","2026","2027","2028"],
+            datasets: [{
+                label: "Index Projection",
+                data: data,
+                borderColor: "#0ea5e9"
+            }]
+        }
+    });
+}
+
+// Valuation Model
+function calculate(){
+    let g = parseFloat(document.getElementById("growth").value)/100;
+    let r = parseFloat(document.getElementById("discount").value)/100;
+    let eps = parseFloat(document.getElementById("eps").value);
+    let pe = parseFloat(document.getElementById("pe").value);
+
+    // Simple DCF
+    let intrinsic = eps * (1+g) / (r - g);
+
+    // PE valuation
+    let peValue = eps * pe;
+
+    document.getElementById("valuation").innerHTML =
+        "DCF Value: $" + intrinsic.toFixed(2) +
+        "<br>PE Valuation: $" + peValue.toFixed(2);
+}
+
+</script>
+
+</body>
+</html>

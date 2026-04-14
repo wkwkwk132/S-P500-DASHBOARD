@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S&P 500 Market Analysis - PESTEL Framework</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #0f172a;
+        color: #e2e8f0;
+    }
+    header {
+        background: linear-gradient(90deg, #1e3a8a, #0ea5e9);
+        padding: 20px;
+        text-align: center;
+    }
+    h1 { margin: 0; }
+    .container {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    .card {
+        background: #1e293b;
+        padding: 20px;
+        border-radius: 12px;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .card:hover {
+        transform: scale(1.03);
+        background: #334155;
+    }
+    .card h2 {
+        margin-top: 0;
+    }
+    .details {
+        display: none;
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    canvas {
+        max-width: 100%;
+        margin-top: 30px;
+    }
+    footer {
+        text-align: center;
+        padding: 15px;
+        background: #020617;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>S&P 500 Market Analysis</h1>
+    <p>PESTEL Framework | Strategic Macro Analysis</p>
+</header>
+
+<div class="container">
+
+    <div class="card" onclick="toggle(this)">
+        <h2>🏛 Political</h2>
+        <div class="details">
+            - Stable U.S. governance supports investor confidence<br>
+            - Trade tensions (China, EU) impact multinational earnings<br>
+            - Fiscal policy (stimulus/spending) influences liquidity<br>
+            - Election cycles create volatility
+        </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+        <h2>💰 Economic</h2>
+        <div class="details">
+            - Interest rates (Fed policy) strongly affect valuations<br>
+            - Inflation impacts consumer spending and margins<br>
+            - GDP growth drives earnings expansion<br>
+            - Strong USD affects global competitiveness
+        </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+        <h2>👥 Social</h2>
+        <div class="details">
+            - Aging population shifts healthcare demand<br>
+            - ESG investing influences capital allocation<br>
+            - Consumer behavior moving digital<br>
+            - Wealth inequality affects spending patterns
+        </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+        <h2>⚙️ Technological</h2>
+        <div class="details">
+            - AI and automation boost productivity<br>
+            - Tech giants dominate index weighting<br>
+            - Cybersecurity risks rising<br>
+            - Innovation cycles drive growth sectors
+        </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+        <h2>🌱 Environmental</h2>
+        <div class="details">
+            - Climate regulation impacts energy sector<br>
+            - Transition to renewables reshapes industries<br>
+            - ESG compliance becoming mandatory<br>
+            - Natural disasters disrupt supply chains
+        </div>
+    </div>
+
+    <div class="card" onclick="toggle(this)">
+        <h2>⚖️ Legal</h2>
+        <div class="details">
+            - SEC regulations ensure transparency<br>
+            - Antitrust scrutiny on big tech<br>
+            - Labor laws affect cost structures<br>
+            - Compliance costs increasing
+        </div>
+    </div>
+
+</div>
+
+<canvas id="chart"></canvas>
+
+<footer>
+    <p>© 2026 S&P 500 Strategic Analysis | Ready for Business Use</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+function toggle(card){
+    let detail = card.querySelector('.details');
+    detail.style.display = detail.style.display === "block" ? "none" : "block";
+}
+
+const ctx = document.getElementById('chart');
+
+new Chart(ctx, {
+    type: 'radar',
+    data: {
+        labels: ['Political','Economic','Social','Technological','Environmental','Legal'],
+        datasets: [{
+            label: 'Impact Level',
+            data: [8, 9, 7, 10, 6, 7],
+            backgroundColor: 'rgba(14,165,233,0.2)',
+            borderColor: '#0ea5e9'
+        }]
+    },
+    options: {
+        scales: {
+            r: {
+                beginAtZero: true,
+                max: 10
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
